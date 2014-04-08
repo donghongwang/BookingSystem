@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC "-//Apache Software Foundation//DTD Struts Configuration 2.1//EN" "http://struts.apache.org/dtds/struts-2.1.dtd">
+<struts>
+	<constant name="struts.locale" value="en_utf-8"></constant>
+	<constant name="struts.objectFactory" value="spring"></constant>
+	
+	<package name="default" extends="struts-default">
+    	<global-results>
+      		<result name="error">/error.jsp</result>
+    	</global-results>
+    	<global-exception-mappings>
+			<exception-mapping result="error" exception="com.bs.exception.ModelException"></exception-mapping>
+			<exception-mapping result="error" exception="java.text.ParseException"></exception-mapping>
+			<exception-mapping result="error" exception="java.lang.Exception"></exception-mapping>
+		</global-exception-mappings>
+  	</package>
+	<package name="default2" extends="struts-default">
+		<action name="about" class="com.bs.action.otherAction" method="toAbout">
+			<result name="success">/about.jsp</result>
+       </action>
+       <action name="exit" class="com.bs.action.otherAction" method="exitSystem">
+			<result name="success" type="redirect">loginSystem.action</result>
+       </action>
+       <action name="loginSystem" class="com.bs.action.otherAction" method="loginSystem">
+			<result name="success">/</result>
+       </action>
+    </package>
+    <include file="actionXml/ResultAction.xml"/>
+    <include file="actionXml/TeamAction.xml"/>
+    <include file="actionXml/P_TAction.xml"/>
+    <include file="actionXml/ChallengeAction.xml"/>
+    <include file="actionXml/PeopleAction.xml"/>
+    
+</struts>    

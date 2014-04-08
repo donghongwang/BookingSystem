@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+    <class name="com.bs.bean.P_T" table="p_t">
+		<composite-id>
+            <key-property name="pid" column="pid" ></key-property>
+            <key-property name="tid" column="tid" ></key-property>
+        </composite-id>
+		<property name="state" ></property>
+		<property name="jointime" ></property>
+    </class>
+</hibernate-mapping>

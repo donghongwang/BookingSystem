@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+    <class name="com.bs.bean.Result" table="result">
+        <id name="cid">  
+	       <generator class="assigned" />
+	    </id> 
+		<property name="judgeid" ></property>
+		<property name="t1_score" ></property>
+		<property name="t2_score"></property>
+		<property name="winid"></property>
+		<property name="t1_appraisalJudge" ></property>
+		<property name="t2_appraisalJudge"></property>
+    </class>
+</hibernate-mapping>

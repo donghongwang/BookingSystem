@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC "-//Apache Software Foundation//DTD Struts Configuration 2.1//EN" "http://struts.apache.org/dtds/struts-2.1.dtd">
+
+<struts>
+   <package name="PeopleAction" extends="default">
+       <action name="login" class="peopleAction" method="checkLogin">
+          <result name="success" type="redirect">index.action</result>
+		  <result name="input">/login/main.jsp</result>
+       </action>
+	   <action name="register" class="peopleAction" method="registerUser">
+          <result name="success" type="redirect">index.action</result>
+		  <result name="input">/login/main.jsp</result>
+       </action>
+	   <action name="lookUserInfo" class="peopleAction" method="lookUserInfo">
+          <result name="success">/userInfo.jsp</result>
+       </action>
+	   <action name="editUserInfo" class="peopleAction" method="editUserInfo">
+          <result name="success">/editUserInfo.jsp</result>
+       </action>
+	   <action name="updateUserInfo" class="peopleAction" method="updateUserInfo">
+          <result name="success">/userInfo.jsp</result>
+       </action>
+   </package>
+   <package name="ajaxJson" extends="json-default">
+    <action name="checkUsername" class="peopleAction" method="checkUsername">
+        <result name="success" type="json"></result>
+    </action>
+</package>
+</struts>

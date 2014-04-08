@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts PUBLIC "-//Apache Software Foundation//DTD Struts Configuration 2.1//EN" "http://struts.apache.org/dtds/struts-2.1.dtd">
+
+<struts>
+   <package name="TeamAction" extends="default">
+		<action name="teamReging" class="teamAction" method="teamReging">
+          <result name="success">/teamRegister.jsp</result>
+		  <result name="reged">/teamRegSucTip.jsp</result>
+       </action>
+	   <action name="teamReged" class="teamAction" method="teamReged">
+          <result name="success">/teamRegSucTip.jsp</result>
+       </action>
+	   <action name="unTeamList" class="teamAction" method="getUnTeamList">
+          <result name="success">/join.jsp</result>
+		  <result name="joined">/teamRegSucTip.jsp</result>
+       </action>
+	   <action name="SearchUnTeamList" class="teamAction" method="searchUnTeamList">
+          <result name="success">/join.jsp</result>
+		  <result name="joined">/teamRegSucTip.jsp</result>
+       </action>
+	   <action name="scoreSort" class="teamAction" method="getScoreSortList">
+          <result name="success">/score.jsp</result>
+       </action>
+	   <action name="searchScoreSort" class="teamAction" method="searchScoreSortList">
+          <result name="success">/score.jsp</result>
+       </action>
+	   <action name="challengeTeam" class="teamAction" method="getChallengeTeamList">
+          <result name="success">/challenge.jsp</result>
+       </action>
+	   <action name="searchChallengeTeam" class="teamAction" method="searchChallengeTeamList">
+          <result name="success">/challenge.jsp</result>
+       </action>
+	   <action name="teamMessage" class="teamAction" method="getTeamMsg">
+          <result name="success">/member.jsp</result>
+       </action>
+	   <action name="regNewLeader" class="teamAction" method="getTeammatesForLeader">
+          <result name="success">/leader.jsp</result>
+       </action>
+	   <action name="updateTeamLeader" class="teamAction" method="updateTeamLeader">
+          <result name="success">/updateLeaderSuccess.jsp</result>
+       </action>
+   </package>
+</struts>

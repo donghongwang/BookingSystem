@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+    <class name="com.bs.bean.Team" table="team">
+        <id name="tid">  
+	       <generator class="native" />
+	    </id> 
+		<property name="tname" ></property>
+		<property name="tjianjie" ></property>
+		<property name="tpoint"></property>
+		<property name="tnumbers"></property>
+		<property name="leaderid" ></property>
+		<property name="tsex"></property>
+		<property name="createtime" ></property>
+    </class>
+</hibernate-mapping>

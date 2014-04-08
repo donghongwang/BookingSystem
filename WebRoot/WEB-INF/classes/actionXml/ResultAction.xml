@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts PUBLIC "-//Apache Software Foundation//DTD Struts Configuration 2.1//EN" "http://struts.apache.org/dtds/struts-2.1.dtd">
+
+<struts>
+   <package name="ResultAction" extends="default">
+		<action name="pingjiaList" class="resultAction" method="getPjListByJudgeid">
+          <result name="success">/performancedisplay.jsp</result>
+       </action>
+	   <action name="judgePerformList" class="resultAction" method="getJudgePerformence">
+          <result name="success">/judgeperformance.jsp</result>
+       </action>
+	   <action name="updateResult" class="resultAction" method="updateResult">
+          <result name="success">/updateResultSuccess.jsp</result>
+       </action>
+	   <action name="toUserMsg" class="resultAction" method="getUnPingjia">
+          <result name="success">/userMessage.jsp</result>
+       </action>
+	   <action name="toEditPingjia" class="resultAction" method="toEditPingjia">
+          <result name="success">/pingjia.jsp</result>
+       </action>
+	   <action name="updatePingjia" class="resultAction" method="updatePingjia">
+          <result name="success">/pingjiaSuccess.jsp</result>
+       </action>
+   </package>
+</struts>

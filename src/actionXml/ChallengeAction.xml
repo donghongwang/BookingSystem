@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts PUBLIC "-//Apache Software Foundation//DTD Struts Configuration 2.1//EN" "http://struts.apache.org/dtds/struts-2.1.dtd">
+
+<struts>
+   <package name="ChallengeAction" extends="default">
+       <action name="index" class="challengeAction" method="getTodayMatchList">
+          <result name="success">/index.jsp</result>
+       </action>
+	   <action name="matchingList" class="challengeAction" method="getMatchingListByJudgeid">
+          <result name="success">/judgechallenge.jsp</result>
+       </action>
+	   <action name="matchedList" class="challengeAction" method="getMatchedListByJudgeid">
+          <result name="success">/reportchallenge.jsp</result>
+       </action>
+	   <action name="unAllowList" class="challengeAction" method="getUnAllowList">
+          <result name="success">/verifychallenge.jsp</result>
+       </action>
+	   <action name="allowList" class="challengeAction" method="getAllowList">
+          <result name="success">/info.jsp</result>
+       </action>
+	   <action name="rejectChallenge" class="challengeAction" method="rejectChallenge">
+          <result name="success">/rejectC.jsp</result>
+       </action>
+	   <action name="toAllowChallenge" class="challengeAction" method="toAllowChallenge">
+          <result name="success">/allowchallenge.jsp</result>
+       </action>
+	   <action name="allowChallenge" class="challengeAction" method="allowChallenge">
+          <result name="success">/allowSuccess.jsp</result>
+       </action>
+	   <action name="rejectMatch" class="challengeAction" method="rejectMatch">
+          <result name="success">/rejectM.jsp</result>
+       </action>
+	   <action name="allowMatch" class="challengeAction" method="allowMatch">
+          <result name="success">/allowMSuccess.jsp</result>
+       </action>
+	   <action name="toChallengeinfo" class="challengeAction" method="toChallengeinfo">
+          <result name="success">/challengeinfo.jsp</result>
+		  <result name="notLeader">/.notLeaderjsp</result>
+       </action>
+	   <action name="addChallengeinfo" class="challengeAction" method="addChallengeinfo">
+          <result name="success">/addChaSuccess.jsp</result>
+		  <result name="notFull">/notFull.jsp</result>
+		  <result name="notLeader">/notLeader.jsp</result>
+       </action>
+	   <action name="toEditreport" class="challengeAction" method="toEditreport">
+          <result name="success">/editreport.jsp</result>
+       </action>
+   </package>
+</struts>

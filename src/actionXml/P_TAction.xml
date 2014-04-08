@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts PUBLIC "-//Apache Software Foundation//DTD Struts Configuration 2.1//EN" "http://struts.apache.org/dtds/struts-2.1.dtd">
+
+<struts>
+   <package name="P_TAction" extends="default">
+		<action name="applyJoin" class="p_tAction" method="addApplyJoin">
+          <result name="success">/applyJoinSuccess.jsp</result>
+		  <result name="joinedOrFull">/joinedOrFull.jsp</result>
+       </action>
+	   <action name="delTeammate" class="p_tAction" method="delTeammate">
+          <result name="success">/deleteTmate.jsp</result>
+       </action>
+	   <action name="addTeammate" class="p_tAction" method="addTeammate">
+          <result name="success">/addTmate.jsp</result>
+		  <result name="full">/teamFull.jsp</result>
+       </action>
+	   <action name="quitOfTeam" class="p_tAction" method="quitOfTeam">
+          <result name="forLeader">/quitForleader.jsp</result>
+		  <result name="forTeamer" type="redirect">quitForTeamer.action</result>
+       </action>
+	   <action name="quitForTeamer" class="p_tAction" method="quitForTeamer">
+          <result name="success">/quitTeamSuccess.jsp</result>
+       </action>
+	   <action name="quitForLeader" class="p_tAction" method="quitForLeader">
+          <result name="success">/quitTeamSuccess.jsp</result>
+       </action>
+   </package>
+</struts>

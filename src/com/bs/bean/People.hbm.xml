@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+    <class name="com.bs.bean.People" table="people">
+        <id name="pid">  
+	       <generator class="native" />
+	    </id> 
+		<property name="pname" ></property>
+		<property name="prealname" ></property>
+		<property name="pxuehao"></property>
+		<property name="password"></property>
+		<property name="phone" ></property>
+		<property name="pduanhao"></property>
+		<property name="psex"></property>
+		<property name="paddress" ></property>
+		<property name="pxueyuan"></property>
+		<property name="psecurity"></property>
+		<property name="pjianjie" ></property>
+		<property name="pself"></property>
+    </class>
+</hibernate-mapping>
