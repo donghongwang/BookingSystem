@@ -1,6 +1,7 @@
 <%@ page language="java" import="java.util.*" pageEncoding="utf8"%>
 <%@ include file="head.jsp" %>
 <%@ include file="left.jsp"%>  
+
 <div class="col-md-9">
 	<h3>2014深大篮球夏季赛</h3>
 <p class="lead">约战说明</p>
@@ -46,6 +47,12 @@
             <s:elseif test="#session.user.pself==0">
             	<td>联系队长约战</td>
             </s:elseif>
+            <td><a class="detailTeam" title='<s:property value="%{#team[0]}"/>'>队伍信息</a></td>
+          </tr>
+          <tr>
+          	<td colspan="8">
+          		<div class='showTeam<s:property value="%{#team[0]}"/>'></div>
+          	</td>
           </tr>
           </s:iterator>
         </tbody>
@@ -59,6 +66,7 @@
 	</ul>
 </s:else>
 </div>
+
 </div>
    
    <%@ include file="footer.jsp" %>  

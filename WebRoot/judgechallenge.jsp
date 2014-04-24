@@ -26,8 +26,14 @@
             <td><s:date name="#match[6]" format="yyyy-MM-dd HH:mm:ss"/></td>
             <td><s:property value="%{#match[7]}"/></td>
             <td><s:property value="%{#match[8]}"/></td>
+            <td><a class="detailTeams" title='<s:property value="%{#match[9]}"/>:<s:property value="%{#match[10]}"/>'>所有队伍信息</a></td>
           </tr>
-          </s:iterator>
+          <tr>
+          	<td colspan="8">
+          		<div class='showTeams<s:property value="%{#match[9]}"/><s:property value="%{#match[10]}"/>'></div>
+          	</td>
+          </tr>
+          </s:iterator> 
         </tbody>
 </table>
 </s:if>

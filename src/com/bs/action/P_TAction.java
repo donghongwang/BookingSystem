@@ -10,6 +10,7 @@ import com.bs.bean.P_T;
 import com.bs.bean.People;
 import com.bs.bean.Team;
 import com.bs.exception.ModelException;
+import com.bs.service.ChallengeService;
 import com.bs.service.P_TService;
 import com.bs.service.PeopleService;
 import com.bs.service.TeamService;
@@ -18,6 +19,7 @@ import com.opensymphony.xwork2.ActionSupport;
 public class P_TAction extends ActionSupport{
 	private P_TService p_tService=null;
 	private TeamService teamService=null;
+	private ChallengeService challengeService=null;
 	private PeopleService peopleService=null;
 	private P_T p_t=null;
 	public void setP_tService(P_TService p_tService) {
@@ -30,6 +32,10 @@ public class P_TAction extends ActionSupport{
 
 	public void setPeopleService(PeopleService peopleService) {
 		this.peopleService = peopleService;
+	}
+	public void setChallengeService(ChallengeService challengeService)
+	{
+		this.challengeService=challengeService;
 	}
 
 	public P_T getP_t() {
@@ -67,6 +73,8 @@ public class P_TAction extends ActionSupport{
 		session.put("user", people);
 		if(people.getPself()==1)
 		{
+			if(this.challengeService.checkHaveChallengeByTid(p_t.getTid()))
+				return "haveChallenge";
 			this.p_tService.delMatesByPid(p_t.getPid());
 			this.teamService.updateTeamNumber(p_t.getTid(), -1);
 			People _people=this.peopleService.getUserByPid(p_t.getPid());
@@ -115,10 +123,21 @@ public class P_TAction extends ActionSupport{
 		People user=(People)session.get("user");
 		user=this.peopleService.getUserByPid(user.getPid());
 		session.put("user", user);
-		if(user.getPself()==1)
-			return "forLeader";
-		else
-			return "forTeamer";
+		if( (user.getPself()==0 || user.getPself()==1) )
+		{
+			List ptlist=this.p_tService.getP_TByPid(user.getPid(), 1);
+			if(ptlist.size()==1)
+			{
+				P_T pt=(P_T)ptlist.get(0);
+				if(this.challengeService.checkHaveChallengeByTid(pt.getTid()))
+					return "haveChallenge";
+				if(user.getPself()==1)
+					return "forLeader";
+				else
+					return "forTeamer";
+			}
+		}
+		return ERROR;
 	}
 	public String quitForTeamer() throws ModelException
 	{

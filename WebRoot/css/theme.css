@@ -3,6 +3,10 @@ body {
   padding-bottom: 30px;
 }
 
+a:hover{
+	cursor:pointer;
+}
+
 .theme-dropdown .dropdown-menu {
   display: block;
   position: static;

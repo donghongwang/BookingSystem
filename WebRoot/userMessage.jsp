@@ -26,7 +26,7 @@
         			</tbody>
 				</table>
 				<s:if test="#request.UnpjTid1.size()>0 || #request.UnpjTid2.size()>0 ">
-				<h3>未评价列表（请对本次比赛的执场教练进行评价）</h3>
+				<h3>未评价列表</h3>
 				<table class="table table-hover">
  					<thead>
           				<tr>
@@ -34,6 +34,7 @@
             				<th>比赛场地</th>
             				<th>执场裁判</th>
             				<th>对战队伍</th>
+            				<th>比分</th>
             				<th>操作</th>
           				</tr>
         			</thead>
@@ -44,7 +45,13 @@
             				<td><s:property value="%{#t1[2]}"/></td>
             				<td><s:property value="%{#t1[3]}"/></td>
             				<td><s:property value="%{#t1[4]}"/></td>
-            				<td><a href="toEditPingjia.action?result.cid=<s:property value="%{#t1[0]}"/>&team=1">评价</a></td>
+            				<td><s:property value="%{#t1[5]}"/>/<s:property value="%{#t1[6]}"/></td>
+            				<td>
+            					<s:if test="#session.user.pself==1">
+									<a href="toEditPingjia.action?result.cid=<s:property value="%{#t1[0]}"/>&team=1">评价</a>
+								</s:if>
+								<s:else>由队长评价</s:else>
+            				</td>
           				</tr>
           				</s:iterator>
           				<s:iterator value="#request.UnpjTid2" id="t2" status="status">
@@ -53,7 +60,13 @@
             				<td><s:property value="%{#t2[2]}"/></td>
             				<td><s:property value="%{#t2[3]}"/></td>
             				<td><s:property value="%{#t2[4]}"/></td>
-            				<td><a href="toEditPingjia.action?result.cid=<s:property value="%{#t2[0]}"/>&team=2">评价</a></td>
+            				<td><s:property value="%{#t1[5]}"/>/<s:property value="%{#t1[6]}"/></td>
+            				<td>
+            					<s:if test="#session.user.pself==1">
+									<a href="toEditPingjia.action?result.cid=<s:property value="%{#t1[0]}"/>&team=1">评价</a>
+								</s:if>
+								<s:else>由队长评价</s:else>
+            				</td>
           				</tr>
           				</s:iterator>
         			</tbody>

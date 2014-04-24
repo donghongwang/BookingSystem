@@ -49,4 +49,8 @@ public class PeopleServiceImpl implements PeopleService{
 	{
 		return this.peopleDao.checkByName(pname);
 	}
+	public List getTeamMemMsg(int tid) throws ModelException
+	{
+		return this.peopleDao.getTeamMemMsg(tid);
+	}
 }

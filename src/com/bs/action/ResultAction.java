@@ -107,7 +107,7 @@ public class ResultAction extends ActionSupport{
 		People people=(People)session.get("user");
 		people=this.peopleService.getUserByPid(people.getPid());
 		session.put("user", people);
-		if(people.getPself()==1)
+		if(people.getPself()==1 || people.getPself()==0)
 		{
 			List ptlist=this.p_tService.getP_TByPid(people.getPid(), 1);
 			if(ptlist.size()==1)
@@ -118,10 +118,9 @@ public class ResultAction extends ActionSupport{
 				Map request=(Map)ActionContext.getContext().get("request");
 				request.put("UnpjTid1", list1);
 				request.put("UnpjTid2", list2);
-				return SUCCESS;
 			}
 		}
-		return ERROR;
+		return SUCCESS;
 	}
 	public String toEditPingjia() throws ModelException
 	{

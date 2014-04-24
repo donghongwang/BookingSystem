@@ -56,12 +56,14 @@
     <property name="p_tService" ref="p_tService"></property>
 	<property name="peopleService" ref="peopleService"></property>
 	<property name="teamService" ref="teamService"></property>
+	<property name="challengeService" ref="challengeService"></property>
   </bean>
   <bean id="challengeAction" class="com.bs.action.ChallengeAction" scope="prototype">
     <property name="challengeService" ref="challengeService"></property>
 	<property name="p_tService" ref="p_tService"></property>
 	<property name="peopleService" ref="peopleService"></property>
 	<property name="teamService" ref="teamService"></property>
+	<property name="resultService" ref="resultService"></property>
   </bean>
   <bean id="resultAction" class="com.bs.action.ResultAction" scope="prototype">
     <property name="resultService" ref="resultService"></property>

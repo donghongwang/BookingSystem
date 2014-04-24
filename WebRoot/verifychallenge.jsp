@@ -35,6 +35,12 @@
             	<a href="toAllowChallenge.action?cid=<s:property value="%{#match[0]}"/>">批准</a>
             	<a href="rejectChallenge.action?challenge.cid=<s:property value="%{#match[0]}"/>">撤销</a>
             </td>
+            <td><a class="detailTeams" title='<s:property value="%{#match[8]}"/>:<s:property value="%{#match[9]}"/>'>所有队伍信息</a></td>
+          </tr>
+          <tr>
+          	<td colspan="7">
+          		<div class='showTeams<s:property value="%{#match[8]}"/><s:property value="%{#match[9]}"/>'></div>
+          	</td>
           </tr>
           </s:iterator>
         </tbody>

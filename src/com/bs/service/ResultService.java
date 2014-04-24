@@ -11,4 +11,5 @@ public interface ResultService {
 	public List getUnPingjiaByTid1(int tid) throws ModelException;
 	public List getUnPingjiaByTid2(int tid) throws ModelException;
 	public void updatePingjia(int cid,int pjNum,String teamid) throws ModelException;
+	public boolean checkPingjiaByTid(int tid) throws ModelException;
 }

@@ -32,10 +32,13 @@
        </action>
 	   <action name="allowMatch" class="challengeAction" method="allowMatch">
           <result name="success">/allowMSuccess.jsp</result>
+          <result name="notPingjia">/mustPingjia.jsp</result>
        </action>
 	   <action name="toChallengeinfo" class="challengeAction" method="toChallengeinfo">
           <result name="success">/challengeinfo.jsp</result>
-		  <result name="notLeader">/.notLeaderjsp</result>
+          <result name="notPingjia">/mustPingjia.jsp</result>
+          <result name="notFull">/otherNotFull.jsp</result>
+		  <result name="notLeader">/notLeader.jsp</result>
        </action>
 	   <action name="addChallengeinfo" class="challengeAction" method="addChallengeinfo">
           <result name="success">/addChaSuccess.jsp</result>
@@ -44,6 +47,9 @@
        </action>
 	   <action name="toEditreport" class="challengeAction" method="toEditreport">
           <result name="success">/editreport.jsp</result>
+       </action>
+       <action name="getAllEndList" class="challengeAction" method="getAllEndList">
+          <result name="success">/allEndList.jsp</result>
        </action>
    </package>
 </struts>

@@ -9,12 +9,14 @@
        </action>
 	   <action name="delTeammate" class="p_tAction" method="delTeammate">
           <result name="success">/deleteTmate.jsp</result>
+          <result name="haveChallenge">/forbidQuitTeam.jsp</result>
        </action>
 	   <action name="addTeammate" class="p_tAction" method="addTeammate">
           <result name="success">/addTmate.jsp</result>
 		  <result name="full">/teamFull.jsp</result>
        </action>
 	   <action name="quitOfTeam" class="p_tAction" method="quitOfTeam">
+	   	  <result name="haveChallenge">/forbidQuitTeam.jsp</result>
           <result name="forLeader">/quitForleader.jsp</result>
 		  <result name="forTeamer" type="redirect">quitForTeamer.action</result>
        </action>

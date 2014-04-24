@@ -126,4 +126,16 @@ public class PeopleDaoImpl extends HibernateDaoSupport implements PeopleDao{
         }
 	}
 	
+	public List getTeamMemMsg(int tid) throws ModelException
+	{
+		String hql="from People as p where pid in(select pid from P_T as pt where state=1 and tid="+tid+")";
+		try{
+			List list=this.getHibernateTemplate().find(hql);
+			return list;
+		}catch(Exception e){
+        	e.printStackTrace();
+        	throw new ModelException(1,e.getMessage());  
+        }
+	}
+	
 }

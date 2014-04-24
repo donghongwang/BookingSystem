@@ -18,9 +18,6 @@
             <th>球队组别</th>
             <th>积分</th>
             <th>创建时间</th>
-            <th>场次</th>
-            <th>胜</th>
-            <th>负</th>
           </tr>
         </thead>
         <tbody>
@@ -32,9 +29,12 @@
             <td><s:property value="%{#soteam[3]}"/></td>        
             <td><s:property value="%{#soteam[4]}"/></td>
             <td><s:date name="#soteam[5]" format="yyyy-MM-dd"/></td>
-            <td>4</td>
-            <td>4</td>
-            <td>0</td>
+            <td><a class="detailTeam" title='<s:property value="%{#soteam[0]}"/>'>队伍信息</a></td>
+          </tr>
+          <tr>
+          	<td colspan="7">
+          		<div class='showTeam<s:property value="%{#soteam[0]}"/>'></div>
+          	</td>
           </tr>
           </s:iterator>
         </tbody>

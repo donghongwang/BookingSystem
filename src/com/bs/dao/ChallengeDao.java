@@ -12,10 +12,14 @@ public interface ChallengeDao {
 	public List getAllowListByTid(int tid) throws ModelException;
 	public List getUnallowListByTid(int tid) throws ModelException;
 	public List getWaitAcceptListByTid(int tid) throws ModelException;
+	public List getLaunchListByTid(int tid) throws ModelException;
+	public List getEndListByTid(int tid,int num) throws ModelException;
+	public long getNumOfEndList(int tid) throws ModelException;
 	public Boolean delChallengeByCid(int cid) throws ModelException;
 	public Boolean UpdateChallenge(Challenge challenge) throws ModelException;
 	public Boolean UpdateChallState(Challenge challenge) throws ModelException;
 	public void addChallenge(Challenge challenge) throws ModelException;
 	public Challenge getChallengeByCid(int cid) throws ModelException;
 	public void UpdateChallengeState(Challenge challenge) throws ModelException;
+	public boolean checkHaveChallengeByTid(int tid) throws ModelException;
 }

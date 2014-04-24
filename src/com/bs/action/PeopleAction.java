@@ -1,4 +1,7 @@
 package com.bs.action;
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import org.apache.struts2.ServletActionContext;
@@ -43,7 +46,6 @@ public class PeopleAction extends ActionSupport{
 	}
 	public String checkUsername() throws ModelException
 	{
-		//this.getPeople().setPname("Åí¿¡Íþ");
 		People p=null;
 		p=this.peopleService.checkByName(this.getPeople().getPname());
 		if(p==null)
@@ -86,4 +88,21 @@ public class PeopleAction extends ActionSupport{
 		ActionContext.getContext().getSession().put("user",_people);
 		return SUCCESS;
 	}
+	
+	private List<People> teamMemMsgs =new ArrayList<People>();
+	public List<People> getTeamMemMsgs() {
+        return teamMemMsgs;
+    }
+    public void setTeamMemMsgs(List<People> teamMemMsgs) {
+        this.teamMemMsgs=teamMemMsgs;
+    }
+    public String returnTeamMemMsg() throws ModelException
+    {
+    	HttpServletRequest request=ServletActionContext.getRequest();
+    	String tid=(String)request.getParameter("tid");
+		List list=this.peopleService.getTeamMemMsg(Integer.parseInt(tid));
+		for(int i=0;i<list.size();i++)
+			teamMemMsgs.add((People)list.get(i));
+		return SUCCESS;
+    }
 }

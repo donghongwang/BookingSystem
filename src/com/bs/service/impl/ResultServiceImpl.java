@@ -39,4 +39,8 @@ public class ResultServiceImpl implements ResultService{
 	{
 		this.resultDao.updatePingjia(cid, pjNum, teamid);
 	}
+	public boolean checkPingjiaByTid(int tid) throws ModelException
+	{
+		return this.resultDao.checkPingjiaByTid(tid);
+	}
 }

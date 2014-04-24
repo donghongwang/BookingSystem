@@ -1,5 +1,5 @@
 <%@ page language="java" import="java.util.*" pageEncoding="utf8"%>
-
+<script src="./js/ajaxJS.js"></script>
   <!-- 注册模块-->
          <div >
 <button class="btn btn-lg btn-primary btn-block" data-toggle="modal" data-target="#myModal">
@@ -17,26 +17,10 @@
          <form role="form" action="register.action" method="post">
   
   <div class="form-group">
-    <label for="exampleInputName">用户名</label>
-    <input type="text" class="form-control" id="exampleInputName" placeholder="请输入用户名" name="people.pname" />
+    <label for="exampleInputNameR">用户名</label>
+    <input type="text" class="form-control" id="exampleInputNameR" placeholder="请输入用户名" name="people.pname" />
     <span id="pnameError"></span>
   </div>
-  <script>
-  		$(document).on("blur","#exampleInputName",function(){
-			if(this.value=="")
-				$("#pnameError").text("(用户名不能为空)");
-			else
-			{
-				$.post("checkUsername.action",{"people.pname":this.value}, function(data) {
-        			$("#pnameError").html("");
-        			if(data.used=="no")
-        				$("#pnameError").html("用户名可以使用");
-        			else
-        				$("#pnameError").html("用户名已被使用，请重新填写");
-				},"JSON");
-			}
-		});
-  </script>
   <div class="form-group">
     <label for="exampleInputPassword1">密码</label>
     <input type="password" class="form-control" id="exampleInputPassword1" placeholder="请输入密码" name="people.password" />

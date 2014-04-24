@@ -13,6 +13,7 @@
             <th>比赛时间</th>
             <th>裁判名称</th>
             <th>比赛场地</th>
+            <th>比赛比分</th>
             <th>队1评价</th>
             <th>队2评价</th>
           </tr>
@@ -26,6 +27,7 @@
             <td><s:date name="#pj[4]" format="yyyy-MM-dd HH:mm:ss"/></td>
             <td><s:property value="%{#pj[5]}"/></td>
             <td><s:property value="%{#pj[6]}"/></td>
+            <td><s:property value="%{#pj[9]}"/>/<s:property value="%{#pj[10]}"/></td>
             <td>
             	<s:if test="#pj[7]>=0">
             		<s:property value="%{#pj[7]}"/>(分)

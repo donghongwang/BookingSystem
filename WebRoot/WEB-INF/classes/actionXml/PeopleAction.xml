@@ -18,11 +18,14 @@
           <result name="success">/editUserInfo.jsp</result>
        </action>
 	   <action name="updateUserInfo" class="peopleAction" method="updateUserInfo">
-          <result name="success">/userInfo.jsp</result>
+          <result name="success" type="redirect">lookUserInfo.action</result>
        </action>
    </package>
    <package name="ajaxJson" extends="json-default">
     <action name="checkUsername" class="peopleAction" method="checkUsername">
+        <result name="success" type="json"></result>
+    </action>
+    <action name="teamMemMsg" class="peopleAction" method="returnTeamMemMsg">
         <result name="success" type="json"></result>
     </action>
 </package>

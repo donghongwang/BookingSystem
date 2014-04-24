@@ -39,6 +39,18 @@ public class ChallengeServiceImpl implements ChallengeService{
 	{
 		return this.challengeDao.getWaitAcceptListByTid(tid);
 	}
+	public List getLaunchListByTid(int tid) throws ModelException
+	{
+		return this.challengeDao.getLaunchListByTid(tid);
+	}
+	public List getEndListByTid(int tid,int num) throws ModelException
+	{
+		return this.challengeDao.getEndListByTid(tid, num);
+	}
+	public long getNumOfEndList(int tid) throws ModelException
+	{
+		return this.challengeDao.getNumOfEndList(tid);
+	}
 	public Boolean delChallengeByCid(int cid) throws ModelException
 	{
 		return this.challengeDao.delChallengeByCid(cid);
@@ -62,5 +74,9 @@ public class ChallengeServiceImpl implements ChallengeService{
 	public void UpdateChallengeState(Challenge challenge) throws ModelException
 	{
 		this.challengeDao.UpdateChallengeState(challenge);
+	}
+	public boolean checkHaveChallengeByTid(int tid) throws ModelException
+	{
+		return this.challengeDao.checkHaveChallengeByTid(tid);
 	}
 }

@@ -45,7 +45,6 @@
     				<label for="exampleInputJianjie">简介</label>
     				<textarea class="form-control" id="exampleInputJianjie" placeholder="请输入简介..." name="people.pjianjie"></textarea>
   				</div>
-  
   				<button type="submit" class="btn btn-lg btn-primary btn-block">保存（一经保存将不可修改）</button>
   				<button type="reset" class="btn btn-lg btn-primary btn-block">重置</button>
   			</form>

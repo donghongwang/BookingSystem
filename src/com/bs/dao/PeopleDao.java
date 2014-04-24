@@ -25,4 +25,6 @@ public interface PeopleDao
 	public List getJudgeList() throws ModelException;
 	
 	public People checkByName(final String pname) throws ModelException;
+	
+	public List getTeamMemMsg(int tid) throws ModelException;
 }

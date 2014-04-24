@@ -16,6 +16,7 @@ import com.bs.exception.ModelException;
 import com.bs.service.ChallengeService;
 import com.bs.service.P_TService;
 import com.bs.service.PeopleService;
+import com.bs.service.ResultService;
 import com.bs.service.TeamService;
 import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
@@ -23,6 +24,7 @@ public class ChallengeAction extends ActionSupport{
 	private ChallengeService challengeService=null;
 	private P_TService p_tService=null;
 	private PeopleService peopleService=null;
+	private ResultService resultService=null;
 	private Challenge challenge=null;
 	private TeamService teamService=null;
 
@@ -37,6 +39,10 @@ public class ChallengeAction extends ActionSupport{
 	}
 	public void setTeamService(TeamService teamService) {
 		this.teamService = teamService;
+	}
+	public void setResultService(ResultService resultService)
+	{
+		this.resultService=resultService;
 	}
 	public Challenge getChallenge() {
 		return challenge;
@@ -104,15 +110,46 @@ public class ChallengeAction extends ActionSupport{
 					List list1=this.challengeService.getAllowListByTid(pt.getTid());
 					List list2=this.challengeService.getUnallowListByTid(pt.getTid());
 					List list3=this.challengeService.getWaitAcceptListByTid(pt.getTid());
+					List list4=this.challengeService.getLaunchListByTid(pt.getTid());
+					List list5=this.challengeService.getEndListByTid(pt.getTid(), 3);
 					Map request=(Map)ActionContext.getContext().get("request");
 					request.put("allowList", list1);
 					request.put("unallowList", list2);
 					request.put("waitAcceptList", list3);
+					request.put("launchList", list4);
+					request.put("endList", list5);
+					long num=this.challengeService.getNumOfEndList(pt.getTid());
+					if(num>3)
+					{
+						request.put("isMore", "yes");
+					}
+					
 				}
 			}
 		}
 		return SUCCESS;
 	} 
+	public String getAllEndList() throws ModelException
+	{
+		Map session=ActionContext.getContext().getSession();
+		People people=(People)session.get("user");
+		people=this.peopleService.getUserByPid(people.getPid());
+		session.put("user", people);
+		if(people.getPself()==0 || people.getPself()==1)
+		{
+			List ptlist=this.p_tService.getP_TByPid(people.getPid(), 1);
+			if(ptlist.size()==1)
+			{
+				P_T pt=(P_T)ptlist.get(0);
+				List list=this.challengeService.getEndListByTid(pt.getTid(), 0);
+				Map request=(Map)ActionContext.getContext().get("request");
+				request.put("allEndList", list);
+				return SUCCESS;
+			}
+		}
+		return ERROR;
+	}
+	
 	public String rejectChallenge() throws ModelException
 	{
 		Map session=ActionContext.getContext().getSession();
@@ -164,10 +201,18 @@ public class ChallengeAction extends ActionSupport{
 		People people=(People)session.get("user");
 		people=this.peopleService.getUserByPid(people.getPid());
 		session.put("user", people);
+		List ptlist=this.p_tService.getP_TByPid(people.getPid(), 1);
+		if(ptlist.size()==1)
+		{
+			P_T pt=(P_T)ptlist.get(0);
+			boolean result2=this.resultService.checkPingjiaByTid(pt.getTid());
+			if(!result2)
+				return "notPingjia";
+		}
 		if(people.getPself()==1)
 		{
-			Boolean result=this.challengeService.UpdateChallState(this.getChallenge());
-			if(result)
+			Boolean result1=this.challengeService.UpdateChallState(this.getChallenge());
+			if(result1)
 				return SUCCESS;
 		}
 		return ERROR;
@@ -178,10 +223,23 @@ public class ChallengeAction extends ActionSupport{
 		People people=(People)session.get("user");
 		people=this.peopleService.getUserByPid(people.getPid());
 		session.put("user", people);
-		if(people.getPself()==1)
-			return SUCCESS;
-		else
+		HttpServletRequest request=ServletActionContext.getRequest();
+		String tid2=(String)request.getParameter("tid2");
+		Team t=this.teamService.getTeamByTid(Integer.parseInt(tid2));
+		
+		List ptlist=this.p_tService.getP_TByPid(people.getPid(), 1);
+		if(ptlist.size()==1)
+		{
+			P_T pt=(P_T)ptlist.get(0);
+			boolean result=this.resultService.checkPingjiaByTid(pt.getTid());
+			if(!result)
+				return "notPingjia";
+		}
+		if(t.getTnumbers()<4)
+			return "notFull";
+		if(people.getPself()!=1)
 			return "notLeader";
+		return SUCCESS;
 	}
 	public String addChallengeinfo() throws ModelException, ParseException
 	{

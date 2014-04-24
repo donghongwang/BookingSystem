@@ -27,7 +27,9 @@
             <td><s:date name="#match[7]" format="yyyy-MM-dd HH:mm:ss"/></td>
             <td><s:property value="%{#match[8]}"/></td>
             <td><s:property value="%{#match[9]}"/></td>
-           	<td><a href="toEditreport.action?challenge.cid=<s:property value="%{#match[0]}"/>">结果录入</a></td>
+           	<td>
+           		<a href="toEditreport.action?challenge.cid=<s:property value="%{#match[0]}"/>">结果录入</a>
+           	</td>
           </tr>
           </s:iterator>
         </tbody>

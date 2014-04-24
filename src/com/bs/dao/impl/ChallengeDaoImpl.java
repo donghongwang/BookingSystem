@@ -40,7 +40,7 @@ public class ChallengeDaoImpl extends HibernateDaoSupport implements ChallengeDa
 		SimpleDateFormat df=new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 		Date now=new Date();
 		String nowTime=df.format(now);
-		String hql="select t1.tname,t2.tname,t1.tpoint,t2.tpoint,p1.pname,p2.pname,c.date,p.pname,c.place "
+		String hql="select t1.tname,t2.tname,t1.tpoint,t2.tpoint,p1.pname,p2.pname,c.date,p.pname,c.place,t1.tid,t2.tid "
 					+"from Team as t1,Team as t2,Challenge as c,People as p,People as p1,People as p2"+
 				" where t1.tid=c.tid1 and t2.tid=c.tid2 and t1.leaderid=p1.pid and t2.leaderid=p2.pid and c.judgeid=p.pid and c.state=3 "+
 				"and c.judgeid="+judgeid+" and c.date>'"+nowTime+"'  order by c.date desc";
@@ -74,7 +74,7 @@ public class ChallengeDaoImpl extends HibernateDaoSupport implements ChallengeDa
 		SimpleDateFormat df=new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 		Date now=new Date();
 		String nowTime=df.format(now);
-		String hql="select c.cid,t1.tname,t2.tname,t1.tpoint,t2.tpoint,p1.pname,p2.pname,c.date "
+		String hql="select c.cid,t1.tname,t2.tname,t1.tpoint,t2.tpoint,p1.pname,p2.pname,c.date,t1.tid,t2.tid "
 				+"from Team as t1,Team as t2,Challenge as c,People as p1,People as p2"+
 			" where t1.tid=c.tid1 and t2.tid=c.tid2 and t1.leaderid=p1.pid and t2.leaderid=p2.pid and c.state=2 "+
 			"and c.date>'"+nowTime+"' order by c.cid";
@@ -118,7 +118,7 @@ public class ChallengeDaoImpl extends HibernateDaoSupport implements ChallengeDa
 	}
 	public List getWaitAcceptListByTid(int tid) throws ModelException
 	{
-		String hql="select c.cid,t1.tname,t1.tpoint,p1.pname,c.date "
+		String hql="select c.cid,t1.tname,t1.tpoint,p1.pname,c.date,c.tid1 "
 				+"from Team as t1,Challenge as c,People as p1 "
 				+"where t1.tid=c.tid1 and t1.leaderid=p1.pid and c.state=1 "
 				+"and c.tid2="+tid+" "
@@ -126,6 +126,52 @@ public class ChallengeDaoImpl extends HibernateDaoSupport implements ChallengeDa
 		try{
 			List list=this.getHibernateTemplate().find(hql);
 			return list;
+		}catch(Exception e){
+			e.printStackTrace();
+			throw new ModelException(1,e.getMessage());  
+		}
+	}
+	public List getLaunchListByTid(int tid) throws ModelException
+	{
+		String hql="select c.cid,t2.tname,t2.tpoint,p2.pname,c.date "
+				+"from Team as t2,Challenge as c,People as p2 "
+				+"where t2.tid=c.tid2 and t2.leaderid=p2.pid and c.state=1 "
+				+"and c.tid1="+tid+" "
+				+"order by c.date";
+		try{
+			List list=this.getHibernateTemplate().find(hql);
+			return list;
+		}catch(Exception e){
+			e.printStackTrace();
+			throw new ModelException(1,e.getMessage());  
+		}
+	}
+	public List getEndListByTid(int tid,int num) throws ModelException
+	{
+		String hql="select t1.tname,t2.tname,p1.pname,p2.pname,c.date,p.pname,c.place,r.t1_score,r.t2_score "
+				+"from Team as t1,Team as t2,Challenge as c,People as p,People as p1,People as p2,Result r"+
+			" where t1.tid=c.tid1 and t2.tid=c.tid2 and t1.leaderid=p1.pid and t2.leaderid=p2.pid and c.judgeid=p.pid and r.cid=c.cid and c.state=5 "+
+			"and (c.tid1="+tid+" or c.tid2="+tid+" ) order by c.date desc";
+		try{
+			if(num>0)
+				this.getHibernateTemplate().setMaxResults(num);
+			List list=this.getHibernateTemplate().find(hql);
+			this.getHibernateTemplate().setMaxResults(50);
+			return list;
+		}catch(Exception e){
+			e.printStackTrace();
+			throw new ModelException(1,e.getMessage());  
+		}
+	}
+	public long getNumOfEndList(int tid) throws ModelException
+	{
+		String hql="select count(c.date) "
+				+"from Team as t1,Team as t2,Challenge as c,People as p,People as p1,People as p2,Result r"+
+			" where t1.tid=c.tid1 and t2.tid=c.tid2 and t1.leaderid=p1.pid and t2.leaderid=p2.pid and c.judgeid=p.pid and r.cid=c.cid and c.state=5 "+
+			"and (c.tid1="+tid+" or c.tid2="+tid+" )";
+		try{
+			List list=this.getHibernateTemplate().find(hql);
+			return (Long) list.get(0);
 		}catch(Exception e){
 			e.printStackTrace();
 			throw new ModelException(1,e.getMessage());  
@@ -195,5 +241,21 @@ public class ChallengeDaoImpl extends HibernateDaoSupport implements ChallengeDa
 			e.printStackTrace();
 			throw new ModelException(1,e.getMessage());  
 		}
+	}
+	public boolean checkHaveChallengeByTid(int tid) throws ModelException
+	{
+		String hql="from Challenge as c "+
+				"where c.state in(1,2,3) and ( tid1="+tid+" or tid2="+tid+" ) ";
+		try{
+			List list=this.getHibernateTemplate().find(hql);
+			if(list.size()>0)
+				return true;
+			else
+				return false;
+		}catch(Exception e){
+			e.printStackTrace();
+			throw new ModelException(1,e.getMessage());  
+		}
+		
 	}
 }
